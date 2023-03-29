@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useMutation } from "react-query";
-import { editPost } from "../api/post";
 
 import { AddPost } from "../component/AddPost";
 import { Post } from "../component/Post";

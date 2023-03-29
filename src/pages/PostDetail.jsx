@@ -1,8 +1,6 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-
 import { useParams } from "react-router-dom";
-import { getPost } from "../api/post";
 
 const PostDetail = () => {
   const { postID } = useParams();

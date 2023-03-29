@@ -1,25 +1,39 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 
 const PostDetail = () => {
+  const [postDetail, setPostDetail] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
   const { postID } = useParams();
-  console.log(postID);
+  console.log(postDetail);
 
-
-  
   useEffect(() => {
-   document.title = "Post Detail";
-  })
+    document.title = "PostDetail";
+    fetchPostDetail();
+  },[]);
+
+  const fetchPostDetail = async () => {
+    setIsLoading(true);
+    await fetch(`https://jsonplaceholder.typicode.com/posts/${postID}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setPostDetail(data);
+        console.log(postDetail);
+      })
+      .catch((error) => console.log(error))
+      .finally(setIsLoading(false));
+  };
+
   return (
     <>
       <div className="container flex justify-center w-full h-full">
         {isLoading && <p>...loading</p>}
-        {data && (
+        {postDetail && (
           <div className="card w-10/12 bg-base-100 shadow-xl">
             <div className="card-body">
-              <h2 className="card-title">{data.data.title}</h2>
-              <p>{data.data.body}</p>
+              <h2 className="card-title">{postDetail.title}</h2>
+              <p>{postDetail.body}</p>
             </div>
           </div>
         )}

@@ -11,7 +11,7 @@ const PostDetail = () => {
   useEffect(() => {
     document.title = "PostDetail";
     fetchPostDetail();
-  },[]);
+  }, []);
 
   const fetchPostDetail = async () => {
     setIsLoading(true);
@@ -20,15 +20,16 @@ const PostDetail = () => {
       .then((data) => {
         setPostDetail(data);
         console.log(postDetail);
+        setIsLoading(false);
       })
       .catch((error) => console.log(error))
-      .finally(setIsLoading(false));
+      .finally();
   };
 
   return (
     <>
-      <div className="container flex justify-center w-full h-full">
-        {isLoading && <p>...loading</p>}
+      <div className="container flex flex-col justify-center items-center w-full h-full">
+        {isLoading && <button className="btn loading">loading</button>}
         {postDetail && (
           <div className="card w-10/12 bg-base-100 shadow-xl">
             <div className="card-body">

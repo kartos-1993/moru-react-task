@@ -1,16 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 
 const PostDetail = () => {
   const { postID } = useParams();
   console.log(postID);
-  const { isLoading, data, isSuccess } = useQuery({
-    queryKey: ["post", postID],
-    queryFn: () => getPost(postID),
-  });
 
-  console.log(data);
+
+  
+  useEffect(() => {
+   document.title = "Post Detail";
+  })
   return (
     <>
       <div className="container flex justify-center w-full h-full">
